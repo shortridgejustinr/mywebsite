@@ -1,22 +1,595 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Azure Website</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background: #f0f4f8;
-        }
-        h1 { color: #0078d4; }
-        p { color: #333; font-size: 1.2rem; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Justin Shortridge — IT & Cloud Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0f1f38;
+    --navy-mid: #1a3252;
+    --blue: #1e5fa8;
+    --blue-light: #2d7dd2;
+    --accent: #4fa3e0;
+    --gold: #c8a96e;
+    --cream: #f8f6f1;
+    --text: #1a1a2e;
+    --muted: #6b7a8d;
+    --border: #dde3ec;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(79,163,224,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--accent), var(--gold));
+  }
+
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 2rem;
+  }
+
+  .header-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+  }
+
+  .header-title {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .header-meta a {
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .header-meta a:hover { color: var(--accent); }
+
+  .header-meta span { display: flex; align-items: center; gap: 5px; }
+
+  .status-badge {
+    background: rgba(79,163,224,0.15);
+    border: 1px solid rgba(79,163,224,0.3);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  /* SECTIONS */
+  .section { margin-bottom: 2.5rem; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    display: none;
+  }
+
+  /* EXPERIENCE */
+  .job { margin-bottom: 1.75rem; }
+  .job:last-child { margin-bottom: 0; }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 2px;
+  }
+
+  .job-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .job-date {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .job-company {
+    font-size: 13px;
+    color: var(--blue);
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+  }
+
+  .job-location {
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .job ul {
+    padding-left: 1.1rem;
+    font-size: 13.5px;
+    color: #3a3a4a;
+  }
+
+  .job ul li {
+    margin-bottom: 0.45rem;
+    line-height: 1.6;
+  }
+
+  /* PROJECTS */
+  .project { margin-bottom: 1.5rem; }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+
+  .project-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .project-date {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .project ul {
+    padding-left: 1.1rem;
+    font-size: 13.5px;
+    color: #3a3a4a;
+  }
+
+  .project ul li { margin-bottom: 0.4rem; line-height: 1.6; }
+
+  /* SIDEBAR */
+  .sidebar { position: sticky; top: 2rem; }
+
+  .sidebar-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .sidebar-section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* EDUCATION sidebar */
+  .edu-school {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .edu-degree {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-bottom: 2px;
+    line-height: 1.5;
+  }
+
+  .edu-gpa {
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 500;
+    margin-top: 6px;
+  }
+
+  .edu-honor {
+    font-size: 11.5px;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 2px;
+  }
+
+  .coursework {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 3px 9px;
+    background: #eef4fb;
+    color: var(--blue);
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  /* SKILLS sidebar */
+  .skill-group { margin-bottom: 1rem; }
+  .skill-group:last-child { margin-bottom: 0; }
+
+  .skill-group-name {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .skill-pill {
+    font-size: 12px;
+    padding: 4px 10px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text);
+  }
+
+  /* CERTS */
+  .cert {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+
+  .cert:last-child { margin-bottom: 0; }
+
+  .cert-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--blue);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .cert-dot.anticipated { background: var(--gold); }
+
+  .cert-name { font-weight: 500; color: var(--text); line-height: 1.4; }
+  .cert-note { font-size: 11px; color: var(--muted); }
+
+  /* LINKEDIN link */
+  .linkedin-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 0;
+    transition: color 0.2s;
+  }
+
+  .linkedin-link:hover { color: var(--blue-light); }
+
+  .linkedin-icon {
+    width: 28px; height: 28px;
+    background: var(--blue);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .linkedin-icon svg { fill: white; width: 16px; height: 16px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    font-size: 12px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  header { animation: fadeUp 0.5s ease both; }
+  .container { animation: fadeUp 0.5s 0.1s ease both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 680px) {
+    .container { grid-template-columns: 1fr; }
+    .header-inner { grid-template-columns: 1fr; }
+    .sidebar { position: static; }
+  }
+</style>
 </head>
 <body>
-    <h1>Hello from Azure! 👋</h1>
-    <p>This website is hosted for free on Azure Static Web Apps.</p>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <p class="header-title">IT &amp; & Aspiring Cloud Professional</p>
+      <h1 class="header-name">Justin Shortridge</h1>
+      <div class="header-meta">
+        <span>📍 Gaston, OR</span>
+        <a href="www.linkedin.com/in/justin-shortridge-4a3bb4274" target="_blank" rel="noopener">
+          LinkedIn Profile
+        </a>
+      </div>
+    </div>
+    <div class="status-badge">Studying Network+</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- MAIN COLUMN -->
+  <main>
+
+    <div class="section">
+      <div class="section-label">Work Experience</div>
+
+      <div class="job">
+        <div class="job-header">
+          <span class="job-title">Field Network Technician</span>
+          <span class="job-date">April 2024 – Present</span>
+        </div>
+        <div class="job-company">Pacific Office Automation <span class="job-location">· Beaverton, OR</span></div>
+        <ul>
+          <li>Diagnose and troubleshoot network connectivity issues, perform routine maintenance, and install and configure business copiers integrated into existing network infrastructure with minimal downtime.</li>
+          <li>Collaborate with clients to understand technical needs, provide tailored solutions, document service activities, and deliver end-user training and ongoing support.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <span class="job-title">Coach / Assistant Manager</span>
+          <span class="job-date">Dec 2010 – 2024</span>
+        </div>
+        <div class="job-company">Walmart Inc. <span class="job-location">· Cornelius, OR</span></div>
+        <ul>
+          <li>Developed associates through training and mentorship programs, resulting in four hourly supervisor promotions and two employees advancing to salaried management roles.</li>
+          <li>Championed customer service initiatives and implemented an adaptive reward system for exceeding service goal thresholds, consistently maintaining high-quality customer experiences.</li>
+          <li>Drove year-over-year sales growth exceeding 5% by analyzing P&amp;L statements, managing budgets, and optimizing merchandise presentation.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Cloud &amp; IT Activities</div>
+
+      <div class="job">
+        <div class="job-header">
+          <span class="job-title">AI-Accelerated Upskilling</span>
+          <span class="job-date">May 2026 – Present</span>
+        </div>
+        <div class="job-company">Microsoft Azure <span class="job-location">· Self-Directed</span></div>
+        <ul>
+          <li>Developing hands-on proficiency in Entra ID tenant management, including user provisioning, group management, and password policy configuration; exploring Intune and Entra Domain Services for additional policy management.</li>
+          <li>Built and deployed a personal portfolio site using Azure Static Web Apps with automated CI/CD deployment through GitHub Actions.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">University Projects</div>
+
+      <div class="project">
+        <div class="project-header">
+          <span class="project-name">Controls for Information Systems and Organizations</span>
+          <span class="project-date">Nov 2023</span>
+        </div>
+        <ul>
+          <li>Designed a presentation referencing NIST Special Publication 800-53R5 with a focus on the Risk Management Framework.</li>
+        </ul>
+      </div>
+
+      <div class="project">
+        <div class="project-header">
+          <span class="project-name">Security Controls, Audits &amp; Incident Response</span>
+          <span class="project-date">Dec 2023</span>
+        </div>
+        <ul>
+          <li>Composed recommendations addressing security vulnerabilities including access control, physical controls, risk assessment, and environmental controls for a fictional organization.</li>
+          <li>Developed a business continuity plan emphasizing IT professional involvement in disaster recovery and incident response planning.</li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-card">
+      <div class="sidebar-section-label">Connect</div>
+      <a class="linkedin-link" href="https://linkedin.com/in/YOUR-LINKEDIN-URL" target="_blank" rel="noopener">
+        <div class="linkedin-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45C23.21 24 24 23.23 24 22.28V1.72C24 .77 23.21 0 22.22 0z"/>
+          </svg>
+        </div>
+        Justin Shortridge on LinkedIn
+      </a>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-section-label">Education</div>
+      <div class="edu-school">Purdue University Global</div>
+      <div class="edu-degree">Cybersecurity Fundamentals Micro-credential</div>
+      <div class="edu-degree">Essential Networking &amp; Security Fundamentals</div>
+      <div class="edu-gpa">GPA: 4.0 / 4.0</div>
+      <div class="edu-honor">Phi Sigma Pi National Honor Fraternity</div>
+      <div class="coursework">
+        <span class="tag">Networking</span>
+        <span class="tag">Microsoft Azure</span>
+        <span class="tag">Cybersecurity</span>
+        <span class="tag">Infrastructure Security</span>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-section-label">Technical Skills</div>
+      <div class="skill-group">
+        <div class="skill-group-name">Cloud &amp; Systems</div>
+        <div class="skill-list">
+          <span class="skill-pill">Microsoft Azure</span>
+          <span class="skill-pill">Entra ID</span>
+          <span class="skill-pill">Azure Bastion</span>
+          <span class="skill-pill">Azure Static Web Apps</span>
+          <span class="skill-pill">Intune</span>
+          <span class="skill-pill">Windows OS</span>
+        </div>
+      </div>
+      <div class="skill-group" style="margin-top:12px;">
+        <div class="skill-group-name">Networking</div>
+        <div class="skill-list">
+          <span class="skill-pill">Network Troubleshooting</span>
+          <span class="skill-pill">Network Protocols</span>
+          <span class="skill-pill">Hardware &amp; Software Config</span>
+          <span class="skill-pill">Copier Integration</span>
+        </div>
+      </div>
+      <div class="skill-group" style="margin-top:12px;">
+        <div class="skill-group-name">Professional</div>
+        <div class="skill-list">
+          <span class="skill-pill">Team Leadership</span>
+          <span class="skill-pill">Client Relations</span>
+          <span class="skill-pill">Documentation</span>
+          <span class="skill-pill">Problem Solving</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-section-label">Certifications</div>
+      <div class="cert">
+        <div class="cert-dot"></div>
+        <div>
+          <div class="cert-name">Konica Minolta Outward Associate</div>
+        </div>
+      </div>
+      <div class="cert">
+        <div class="cert-dot anticipated"></div>
+        <div>
+          <div class="cert-name">CompTIA Network+</div>
+          <div class="cert-note">Anticipated June 2026</div>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<footer>
+  &copy; 2026 Justin Shortridge &nbsp;·&nbsp; Hosted on Microsoft Azure
+</footer>
+
 </body>
 </html>
